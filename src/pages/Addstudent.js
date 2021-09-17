@@ -23,7 +23,7 @@ class Addstudent extends Component
         e.preventDefault();
         // document.getElementById('updatebtn').disabled = true;
         // document.getElementById('updatebtn').innerText = "Saving";
-        const res = await axios.post('http://127.0.0.1:8000/api/add-student', this.state);
+        const res = await axios.post('https://laravel.fosl-ailesgroup.com/api/add-student', this.state);
         if(res.data.status === 200)
         {
             // document.getElementById('updatebtn').disabled = false;

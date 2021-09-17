@@ -10,7 +10,7 @@ class Student extends Component
         loading: true,
     }
   async componentDidMount(){
-        const res = await axios.get('http://127.0.0.1:8000/api/students');
+        const res = await axios.get('https://laravel.fosl-ailesgroup.com/api/students');
 
        
         if(res.data.status === 200)
@@ -29,7 +29,7 @@ class Student extends Component
         const thidClickedFunda = e.currentTarget;
         thidClickedFunda.innerText = "Deleting";
 
-        const res =await axios.delete(`http://127.0.0.1:8000/api/delete-student/${id}`);
+        const res =await axios.delete(`https://laravel.fosl-ailesgroup.com/api/delete-student/${id}`);
         if(res.data.status === 200)
         {
             thidClickedFunda.closest("tr").remove();

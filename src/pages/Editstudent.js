@@ -22,7 +22,7 @@ class Editstudent extends Component
     async componentDidMount(){
         const stud_id = this.props.match.params.id;
          // console.log(stud_id);
-        const res = await axios.get(`http://127.0.0.1:8000/api/edit-student/${stud_id}`);
+        const res = await axios.get(`https://laravel.fosl-ailesgroup.com/api/edit-student/${stud_id}`);
 
       
         if(res.data.status === 200)
@@ -54,7 +54,7 @@ class Editstudent extends Component
        // document.getElementById('updatebtn').disabled = true;
        // document.getElementById('updatebtn').innerText = "Updating";
         const stud_id = this.props.match.params.id;
-        const res = await axios.put(`http://127.0.0.1:8000/api/update-student/${stud_id}`, this.state);
+        const res = await axios.put(`https://laravel.fosl-ailesgroup.com/api/update-student/${stud_id}`, this.state);
         if(res.data.status === 200)
         {
                 //console.log(res.data.message);
