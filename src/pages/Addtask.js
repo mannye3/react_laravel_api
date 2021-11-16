@@ -2,14 +2,14 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import swal from 'sweetalert';
 import axios from 'axios';
-class Addstudent extends Component
+class Addtask extends Component
 {
 
     state = {
-        name: '',
-        course: '',
-        email: '',
-        phone: '',
+        title: '',
+        description: '',
+        assignTo: '',
+       
         error_list: [],
     }
 
@@ -19,11 +19,11 @@ class Addstudent extends Component
         });
     }
 
-    saveStudent = async (e) =>{
+    saveTask = async (e) =>{
         e.preventDefault();
         // document.getElementById('updatebtn').disabled = true;
         // document.getElementById('updatebtn').innerText = "Saving";
-        const res = await axios.post('https://laravel.fosl-ailesgroup.com/api/add-student', this.state);
+        const res = await axios.post('http://127.0.0.1:8000/api/add-task', this.state);
         if(res.data.status === 200)
         {
             // document.getElementById('updatebtn').disabled = false;
@@ -37,10 +37,10 @@ class Addstudent extends Component
                   this.props.history.push('/');
                 //console.log(res.data.message);
                 this.setState({
-                    name: '',
-                    course: '',
-                    email: '',
-                    phone: '',
+                    title: '',
+                    description: '',
+                    assignTo: '',
+                   
 
                 });
         }
@@ -60,40 +60,35 @@ class Addstudent extends Component
                     <div className="col-md-6">
                                 <div className="card">
                                 <div className="card-header">
-                                    <h4>Add Student
+                                    <h4>Add Task
                                         <Link to={'/'} className="btn btn-primary btn-sm- float-end"> Back</Link>
                                     </h4>
                                     </div>
                                         <div className="card-body">
 
-                                            <form onSubmit={this.saveStudent}>
+                                            <form onSubmit={this.saveTask}>
                                                 <div className="form-group mb-3">
-                                                    <label>Student Nmae</label>
-                                                    <input  type="text" name="name" onChange={this.handleInput} value={this.state.name} className="form-control"/>
-                                                    <span className="text-danger">{this.state.error_list.name}</span>
+                                                    <label>Title</label>
+                                                    <input  type="text" name="title" onChange={this.handleInput} value={this.state.title} className="form-control"/>
+                                                    <span className="text-danger">{this.state.error_list.title}</span>
                                                 </div>
 
                                                 <div className="form-group mb-3">
-                                                    <label>Student Course</label>
-                                                    <input type="text" name="course" onChange={this.handleInput} value={this.state.course} className="form-control"/>
-                                                    <span className="text-danger">{this.state.error_list.course}</span>
+                                                    <label>description</label>
+                                                    <textarea type="text" name="description" onChange={this.handleInput} value={this.state.course} className="form-control"> </textarea>
+                                                    <span className="text-danger">{this.state.error_list.description}</span>
                                                 </div>
 
 
                                                 <div className="form-group mb-3">
-                                                    <label>Student Email</label>
-                                                    <input type="text" name="email" onChange={this.handleInput} value={this.state.email} className="form-control"/>
-                                                    <span className="text-danger">{this.state.error_list.email}</span>
+                                                    <label>Assign To</label>
+                                                    <input type="text" name="assignTo" onChange={this.handleInput} value={this.state.email} className="form-control"/>
+                                                    <span className="text-danger">{this.state.error_list.assignTo}</span>
                                                 </div>
 
+                                                
                                                 <div className="form-group mb-3">
-                                                    <label>Student Phone</label>
-                                                    <input type="text" name="phone" onChange={this.handleInput} value={this.state.phone} className="form-control"/>
-                                                    <span className="text-danger">{this.state.error_list.phone}</span>
-                                                </div>
-
-                                                <div className="form-group mb-3">
-                                                   <button type="submit"  className="btn btn-primary">Save student</button>
+                                                   <button type="submit"  className="btn btn-primary">Save Task</button>
 
                                                 </div>
                                             
@@ -108,4 +103,4 @@ class Addstudent extends Component
     }
 }
 
-export default Addstudent;
+export default Addtask;

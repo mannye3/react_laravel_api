@@ -2,14 +2,13 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import swal from 'sweetalert';
 import axios from 'axios';
-class Editstudent extends Component
+class Edittask extends Component
 {
 
     state = {
-        name: '',
-        course: '',
-        email: '',
-        phone: '',
+        title: '',
+        description: '',
+        assignTo: '',
         error_list: [],
     }
 
@@ -22,16 +21,16 @@ class Editstudent extends Component
     async componentDidMount(){
         const stud_id = this.props.match.params.id;
          // console.log(stud_id);
-        const res = await axios.get(`https://laravel.fosl-ailesgroup.com/api/edit-student/${stud_id}`);
+        const res = await axios.get(`http://127.0.0.1:8000/api/edit-task/${stud_id}`);
 
       
         if(res.data.status === 200)
         {
             this.setState({
-                name: res.data.student.name,
-                course: res.data.student.course,
-                email: res.data.student.email,
-                phone: res.data.student.phone,
+                title: res.data.task.title,
+                description: res.data.task.description,
+                assignTo: res.data.task.assignTo,
+                
             });
         }
 
@@ -49,12 +48,12 @@ class Editstudent extends Component
 
     }
 
-    updateStudent = async (e) =>{
+    updateTask = async (e) =>{
         e.preventDefault();
        // document.getElementById('updatebtn').disabled = true;
        // document.getElementById('updatebtn').innerText = "Updating";
         const stud_id = this.props.match.params.id;
-        const res = await axios.put(`https://laravel.fosl-ailesgroup.com/api/update-student/${stud_id}`, this.state);
+        const res = await axios.post(`http://127.0.0.1:8000/api/update-task/${stud_id}`, this.state);
         if(res.data.status === 200)
         {
                 //console.log(res.data.message);
@@ -105,38 +104,29 @@ class Editstudent extends Component
                                     </div>
                                         <div className="card-body">
 
-                                            <form onSubmit={this.updateStudent}>
-                                                <div className="form-group mb-3">
-                                                    <label>Student Nmae</label>
-                                                    <input  type="text" name="name" onChange={this.handleInput} value={this.state.name} className="form-control"/>
-                                                    <span className="text-danger">{this.state.error_list.name}</span>
-
+                                            <form onSubmit={this.updateTask}>
+                                            <div className="form-group mb-3">
+                                                    <label>Title</label>
+                                                    <input  type="text" name="title" onChange={this.handleInput} value={this.state.title} className="form-control"/>
+                                                    <span className="text-danger">{this.state.error_list.title}</span>
                                                 </div>
 
                                                 <div className="form-group mb-3">
-                                                    <label>Student Course</label>
-                                                    <input type="text" name="course" onChange={this.handleInput} value={this.state.course} className="form-control"/>
-                                                    <span className="text-danger">{this.state.error_list.course}</span>
-
+                                                    <label>Description</label>
+                                                    <textarea type="text" name="description" onChange={this.handleInput} value={this.state.description} className="form-control"> </textarea>
+                                                    <span className="text-danger">{this.state.error_list.description}</span>
                                                 </div>
 
 
                                                 <div className="form-group mb-3">
-                                                    <label>Student Email</label>
-                                                    <input type="text" name="email" onChange={this.handleInput} value={this.state.email} className="form-control"/>
-                                                    <span className="text-danger">{this.state.error_list.email}</span>
-
+                                                    <label>Assign To</label>
+                                                    <input type="text" name="assignTo" onChange={this.handleInput} value={this.state.assignTo} className="form-control"/>
+                                                    <span className="text-danger">{this.state.error_list.assignTo}</span>
                                                 </div>
 
-                                                <div className="form-group mb-3">
-                                                    <label>Student Phone</label>
-                                                    <input type="text" name="phone" onChange={this.handleInput} value={this.state.phone} className="form-control"/>
-                                                    <span className="text-danger">{this.state.error_list.phone}</span>
-
-                                                </div>
 
                                                 <div className="form-group mb-3">
-                                                   <button type="submit" id="updatebtn" className="btn btn-primary">Updte student</button>
+                                                   <button type="submit" id="updatebtn" className="btn btn-primary">Update Task</button>
 
                                                 </div>
                                             
@@ -151,4 +141,4 @@ class Editstudent extends Component
     }
 }
 
-export default Editstudent;
+export default Edittask;

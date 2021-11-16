@@ -1,17 +1,17 @@
 import React  from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
-import Student from './pages/Student';
-import Addstudent from './pages/Addstudent';
-import Editstudent from './pages/Editstudent';
+import Task from './pages/Task';
+import Addtask from './pages/Addtask';
+import Editstudent from './pages/Edittask';
 
 function App() {
   return (
    <Router>
      <Switch>
-       <Route exact path="/" component={Student} />
-       <Route exact path="/add-student" component={Addstudent} />
-       <Route exact path="/edit-student/:id" component={Editstudent} />
+       <Route exact path="/" component={Task} />
+       <Route exact path="/add-task" component={Addtask} />
+       <Route exact path="/edit-task/:id" component={Editstudent} />
 
        
      </Switch>

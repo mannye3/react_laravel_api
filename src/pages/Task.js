@@ -3,33 +3,34 @@ import {Link} from 'react-router-dom';
 import swal from 'sweetalert';
 import axios from 'axios';
 
-class Student extends Component
+class Task extends Component
 {
     state = {
-        students: [],
+        tasks: [],
         loading: true,
     }
   async componentDidMount(){
-        const res = await axios.get('https://laravel.fosl-ailesgroup.com/api/students');
+        const res = await axios.get('http://127.0.0.1:8000/api/tasks');
 
        
         if(res.data.status === 200)
         {
             this.setState({
-                students: res.data.students,
+                tasks: res.data.tasks,
                 loading: false,
             });
+           
         }
 
 
 
     }
 
-    deleteStudent = async (e, id) => {
+    deleteTask = async (e, id) => {
         const thidClickedFunda = e.currentTarget;
         thidClickedFunda.innerText = "Deleting";
 
-        const res =await axios.delete(`https://laravel.fosl-ailesgroup.com/api/delete-student/${id}`);
+        const res =await axios.delete(`http://127.0.0.1:8000/api/delete-task/${id}`);
         if(res.data.status === 200)
         {
             thidClickedFunda.closest("tr").remove();
@@ -39,34 +40,34 @@ class Student extends Component
                 icon: "success",
                 button: "Ok!",
               });
-            //console.log(res.data.message);
+            
         }
     }
 
     render(){
 
-        var student_table = "";
+        var task_table = "";
         if(this.state.loading)
         {
-            student_table = <tr><td colSpan="7"><h2>Loading.....</h2></td></tr>
+            task_table = <tr><td colSpan="7"><h2>Loading.....</h2></td></tr>
 
         }
         else 
         {
-            student_table = 
-            this.state.students.map( (item) => {
+            task_table = 
+            this.state.tasks.map( (item) => {
                 return (
                     <tr key={item.id}>
                         <td>{item.id}</td>
-                        <td>{item.name}</td>
-                        <td>{item.course}</td>
-                        <td>{item.email}</td>
-                        <td>{item.phone}</td>
+                        <td>{item.title}</td>
+                        <td>{item.description}</td>
+                        <td>{item.assignTo}</td>
+                        
                         <td>
-                            <Link  to={`edit-student/${item.id}`} className="btn btn-success btn-sm">Edit</Link>
+                            <Link  to={`edit-task/${item.id}`} className="btn btn-success btn-sm">Edit</Link>
                         </td>
                         <td>
-                            <button type="button" onClick={(e) => this.deleteStudent(e, item.id)} className="btn btn-danger btn-sm">Delete</button>
+                            <button type="button" onClick={(e) => this.deleteTask(e, item.id)} className="btn btn-danger btn-sm">Delete</button>
                            
                         </td>
                     </tr>
@@ -79,8 +80,8 @@ class Student extends Component
                     <div className="col-md-12">
                                 <div className="card">
                                 <div className="card-header">
-                                    <h4>Students Data
-                                        <Link to={'add-student'} className="btn btn-primary btn-sm- float-end">Add Student</Link>
+                                    <h4>Tasks
+                                        <Link to={'add-task'} className="btn btn-primary btn-sm- float-end">Add Tasks</Link>
                                     </h4>
                                     </div>
                                         <div className="card-body">
@@ -89,16 +90,16 @@ class Student extends Component
                                                 <thead>
                                                     <tr>
                                                         <th>ID</th>
-                                                        <th>Name</th>
-                                                        <th>Course</th>
-                                                        <th>Email</th>
-                                                        <th>Phone</th>
+                                                        <th>Title</th>
+                                                        <th>Description</th>
+                                                        <th>Assign To</th>
+                                                       
                                                         <th>Edit</th>
                                                         <th>Delete</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                {student_table}
+                                                {task_table}
                                                 </tbody>
 
                                             </table>
@@ -112,4 +113,4 @@ class Student extends Component
     }
 }
 
-export default Student;
+export default Task;
