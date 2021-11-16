@@ -21,7 +21,7 @@ class Edittask extends Component
     async componentDidMount(){
         const stud_id = this.props.match.params.id;
          // console.log(stud_id);
-        const res = await axios.get(`http://127.0.0.1:8000/api/edit-task/${stud_id}`);
+        const res = await axios.get(`https://laravel.fosl-ailesgroup.com/api/edit-task/${stud_id}`);
 
       
         if(res.data.status === 200)
@@ -53,7 +53,7 @@ class Edittask extends Component
        // document.getElementById('updatebtn').disabled = true;
        // document.getElementById('updatebtn').innerText = "Updating";
         const stud_id = this.props.match.params.id;
-        const res = await axios.post(`http://127.0.0.1:8000/api/update-task/${stud_id}`, this.state);
+        const res = await axios.post(`https://laravel.fosl-ailesgroup.com/api/update-task/${stud_id}`, this.state);
         if(res.data.status === 200)
         {
                 //console.log(res.data.message);

@@ -10,7 +10,7 @@ class Task extends Component
         loading: true,
     }
   async componentDidMount(){
-        const res = await axios.get('http://127.0.0.1:8000/api/tasks');
+        const res = await axios.get('https://laravel.fosl-ailesgroup.com/api/tasks');
 
        
         if(res.data.status === 200)
@@ -30,7 +30,7 @@ class Task extends Component
         const thidClickedFunda = e.currentTarget;
         thidClickedFunda.innerText = "Deleting";
 
-        const res =await axios.delete(`http://127.0.0.1:8000/api/delete-task/${id}`);
+        const res =await axios.delete(`https://laravel.fosl-ailesgroup.com/api/delete-task/${id}`);
         if(res.data.status === 200)
         {
             thidClickedFunda.closest("tr").remove();
