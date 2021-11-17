@@ -23,7 +23,7 @@ class Addtask extends Component
         e.preventDefault();
         // document.getElementById('updatebtn').disabled = true;
         // document.getElementById('updatebtn').innerText = "Saving";
-        const res = await axios.post('http://127.0.0.1:8000/api/add-task', this.state);
+        const res = await axios.post(`https://laravel.fosl-ailesgroup.com/api/add-task`, this.state);
         if(res.data.status === 200)
         {
             // document.getElementById('updatebtn').disabled = false;
@@ -69,7 +69,7 @@ class Addtask extends Component
                                             <form onSubmit={this.saveTask}>
                                                 <div className="form-group mb-3">
                                                     <label>Title</label>
-                                                    <input  type="text" name="title" onChange={this.handleInput} value={this.state.title} className="form-control"/>
+                                                    <input  type="text" name="title" onChange={this.handleInput} value={this.state.name} className="form-control"/>
                                                     <span className="text-danger">{this.state.error_list.title}</span>
                                                 </div>
 

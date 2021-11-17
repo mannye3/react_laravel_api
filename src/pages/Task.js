@@ -10,7 +10,7 @@ class Task extends Component
         loading: true,
     }
   async componentDidMount(){
-        const res = await axios.get('https://laravel.fosl-ailesgroup.com/api/tasks');
+        const res = await axios.get(`https://laravel.fosl-ailesgroup.com/api/tasks`);
 
        
         if(res.data.status === 200)
